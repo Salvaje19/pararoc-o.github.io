@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flores y Corazones para Ti</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      position: relative;
+      overflow: hidden;
+      flex-direction: column; /* Cambiado de column a row */
+    }
+
+    /* Animación de imágenes cayendo */
+    .falling-image {
+      position: absolute;
+      top: -10%;
+      width: 40px;
+      height: 40px;
+      background-image: url('corazon.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: 0.9;
+      animation: fall linear infinite;
+    }
+    
+    /* Generar varias imágenes cayendo con diferentes posiciones */
+    .falling-image:nth-child(2) { left: 20%; animation-duration: 5s; }
+    .falling-image:nth-child(3) { left: 40%; animation-duration: 6s; }
+    .falling-image:nth-child(4) { left: 60%; animation-duration: 4.5s; }
+    .falling-image:nth-child(5) { left: 80%; animation-duration: 6.5s; }
+    .falling-image:nth-child(6) { left: 10%; animation-duration: 7s; }
+    .falling-image:nth-child(7) { left: 90%; animation-duration: 5.5s; }
+
+    /* Animación de caída */
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Estilo del contenedor de los recuadros */
+    .container {
+      display: flex;  /* Cambio aquí: usaremos flexbox */
+      justify-content: space-between;  /* Separación entre los recuadros */
+      width: 80%; /* Ajustamos el ancho del contenedor para que los recuadros estén juntos */
+      margin-top: 40px;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 4px solid #8a2be2;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      text-align: center;
+      max-width: 320px;
+      animation: fadeIn 2s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .card h1 {
+      color: #8a2be2;
+      font-size: 1.8em;
+    }
+    .flower-image {
+      width: 100px;
+      height: auto;
+      margin: 15px 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 2s ease;
+    }
+    p {
+      font-size: 1em;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Estilo del recuadro de la carta amorosa */
+    .love-letter {
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 4px solid #8a2be2;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      max-width: 400px;
+      text-align: left;
+      animation: fadeIn 2s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .love-letter h2 {
+      color: #8a2be2;
+      font-size: 1.6em;
+    }
+    .love-letter p {
+      font-size: 1em;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="mosaic"></div>
+
+  <!-- Imágenes cayendo -->
+  <div class="falling-image"></div>
+  <div class="falling-image"></div>
+  <div class="falling-image"></div>
+  <div class="falling-image"></div>
+  <div class="falling-image"></div>
+  <div class="falling-image"></div>
+  <div class="falling-image"></div>
+
+  <!-- Contenedor para los recuadros alineados horizontalmente -->
+  <div class="container">
+    <!-- Tarjeta con flores -->
+    <div class="card">
+      <h1>Para Ti</h1>
+      <!-- Imagen de flores moradas -->
+      <img src="flores.png" alt="Flores moradas" class="flower-image">
+      <!-- Segunda imagen de flores -->
+      <img src="flores2.png" alt="Flores moradas" class="flower-image">
+      <p>Aunque no esté contigo hoy, estas flores y corazones son para recordarte lo importante que eres para mí. 💜💚</p>
+    </div>
+
+    <!-- Carta amorosa -->
+    <div class="love-letter">
+      <h2>Mi Querida Rocío</h2>
+      <p>Hoy quiero aprovechar este momento para escribirte unas palabras que salen de lo más profundo de mi corazón. Aunque no pueda estar a tu lado en este momento, quiero que sepas que siempre estás en mis pensamientos.</p>
+      <p>Tu amor ilumina mi vida, y tus gestos me hacen sentir afortunado. No hay un solo día en el que no agradezca el haberte encontrado. Cada día a tu lado es un regalo, y no puedo esperar para ver qué nos depara el futuro.</p>
+      <p>Te amo con todo mi ser, y aunque hoy no podamos estar juntos, quiero que sepas que mi corazón siempre está contigo.</p>
+      <p>Con todo mi amor,</p>
+      <p>Adrian</p>
+    </div>
+  </div>
+
+  <script>
+    // Definir las URLs de las imágenes que se usarán en el mosaico
+    const images = [
+      'Rocio.jpg',
+      'Rocio2.jpg',
+      'Rocio3.jpg',
+    ];
+
+    // Seleccionar el contenedor donde se agregarán las imágenes del mosaico
+    const mosaicContainer = document.getElementById('mosaic');
+
+    // Función para generar el mosaico con imágenes aleatorias
+    function generateMosaic() {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      // Establecer el tamaño de las imágenes del mosaico
+      const imageSize = 150;
+      
+      // Calcular cuántas imágenes caben en la pantalla
+      const rows = Math.ceil(screenHeight / imageSize);
+      const columns = Math.ceil(screenWidth / imageSize);
+
+      // Generar imágenes en posiciones aleatorias
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < columns; col++) {
+          const img = document.createElement('div');
+          img.style.position = 'absolute';
+          img.style.width = `${imageSize}px`;
+          img.style.height = `${imageSize}px`;
+          img.style.backgroundImage = `url(${images[Math.floor(Math.random() * images.length)]})`;
+          img.style.backgroundSize = 'cover';
+          img.style.left = `${col * imageSize}px`;
+          img.style.top = `${row * imageSize}px`;
+          mosaicContainer.appendChild(img);
+        }
+      }
+    }
+
+    // Llamar a la función para generar el mosaico cuando la página se carga
+    generateMosaic();
+  </script>
+</body>
+</html>
